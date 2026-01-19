@@ -6,48 +6,60 @@
     <title>FitMatch | Find Your Coach</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<div class="top-wallet">
+    <span class="wallet-label">Wallet:</span>
+    <span id="balance">0</span>€
+</div>
 
-    <header>
-        <div class="logo">FitMatch</div>
-        <div class="wallet-display">
-            Wallet: <span id="balance">0</span>€
-            <button onclick="showDeposit()" class="add-funds">+</button>
-        </div>
-    </header>
-
-    <main id="app">
-        <div id="discovery-zone">
-            <div class="card-container" id="coach-card">
-                <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=400" alt="Coach" id="coach-img">
-                <div class="card-info">
-                    <h2 id="coach-name">Coach Alex</h2>
-                    <p id="coach-bio">Specialist in HIIT and Weight Loss.</p>
-                    <p class="stats">
-                        <span id="coach-price">40€/h</span> • 
-                        <span id="coach-dist">2.5 km away</span>
-                    </p>
-                </div>
-                <div class="card-actions">
-                    <button class="btn reject" onclick="nextCoach()">✖</button>
-                    <button class="btn match" onclick="matchCoach()">Match</button>
-                </div>
+<main id="app">
+    <section id="discovery-tab" class="tab-content active">
+        <div class="card-container" id="coach-card">
+            <img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=400" id="coach-img">
+            <div class="card-info">
+                <h2 id="coach-name">Coach Alex</h2>
+                <p id="coach-price" style="color: #ff9f00; font-weight: bold;">40€/h</p>
+                <p id="coach-bio">HIIT & Weight Loss Specialist.</p>
+            </div>
+            <div class="card-actions">
+                <button class="btn reject" onclick="nextCoach()">✖</button>
+                <button class="btn match" onclick="matchCoach()">Match</button>
             </div>
         </div>
+    </section>
 
-        <div id="wallet-modal" class="modal">
-            <div class="modal-content">
-                <h3>Add Funds</h3>
-                <div class="fund-options">
-                    <button onclick="addMoney(5)">+5€</button>
-                    <button onclick="addMoney(10)">+10€</button>
-                    <button onclick="addMoney(20)">+20€</button>
-                </div>
-                <button onclick="hideDeposit()" class="close-btn">Close</button>
+    <section id="account-tab" class="tab-content">
+        <div class="account-container">
+            <h2>My Account</h2>
+            <div class="profile-pic">👤</div>
+            <div class="info-group">
+                <label>Name</label>
+                <p>John Doe</p>
             </div>
+            <div class="info-group">
+                <label>Goal</label>
+                <p>Build Muscle</p>
+            </div>
+            <hr>
+            <h3>Manage Wallet</h3>
+            <button onclick="showDeposit()" class="btn-deposit">Add Funds to Wallet</button>
         </div>
-    </main>
+    </section>
+</main>
 
-    <script src="script.js"></script>
-</body>
+<nav class="bottom-nav">
+    <button onclick="showTab('discovery-tab')">🔥 Discover</button>
+    <button onclick="showTab('account-tab')">👤 Account</button>
+</nav>
+
+<div id="wallet-modal" class="modal">
+    <div class="modal-content">
+        <h3>Add Funds</h3>
+        <div class="fund-options">
+            <button onclick="addMoney(5)">+5€</button>
+            <button onclick="addMoney(10)">+10€</button>
+            <button onclick="addMoney(20)">+20€</button>
+        </div>
+        <button onclick="hideDeposit()" class="close-btn">Cancel</button>
+    </div>
+</div>
 </html>

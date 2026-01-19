@@ -54,6 +54,9 @@ function addMoney(amount) {
     alert(`Success! Added ${amount}€ to your wallet.`);
     hideDeposit();
 }
+
+// Init
+updateBalanceDisplay();
 // Tab Switching Logic
 function showTab(tabId) {
     // Hide all tabs
@@ -76,6 +79,3 @@ function addMoney(amount) {
     setTimeout(() => { balanceEl.style.color = "#ff9f00"; }, 500);
     hideDeposit();
 }
-
-// Init
-updateBalanceDisplay();

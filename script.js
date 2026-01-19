@@ -54,6 +54,28 @@ function addMoney(amount) {
     alert(`Success! Added ${amount}€ to your wallet.`);
     hideDeposit();
 }
+// Tab Switching Logic
+function showTab(tabId) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    // Show selected tab
+    document.getElementById(tabId).classList.add('active');
+}
+
+// ... Keep your previous nextCoach, addMoney, and matchCoach functions here ...
+
+// Modified addMoney to show the orange updates
+function addMoney(amount) {
+    userBalance += amount;
+    updateBalanceDisplay();
+    // Simple visual feedback
+    const balanceEl = document.getElementById('balance');
+    balanceEl.style.color = "white"; 
+    setTimeout(() => { balanceEl.style.color = "#ff9f00"; }, 500);
+    hideDeposit();
+}
 
 // Init
 updateBalanceDisplay();

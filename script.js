@@ -1,4 +1,4 @@
-// Mock Data for Coaches
+// 1. DATA: The coaches available
 const coaches = [
     { name: "Coach Alex", bio: "HIIT & Weight Loss Specialist", price: 40, dist: "2.5 km", img: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=400" },
     { name: "Sarah Jenkins", bio: "Yoga and Mindfulness Guru", price: 35, dist: "0.8 km", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=400" },
@@ -8,38 +8,56 @@ const coaches = [
 let currentIndex = 0;
 let userBalance = 0;
 
-// Initialize Wallet from "Storage"
-function updateBalanceDisplay() {
-    document.getElementById('balance').innerText = userBalance;
+// 2. TAB SYSTEM: Switches between Discovery and Account
+function showTab(tabId) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+        tab.style.display = "none"; // Ensure they are physically hidden
+    });
+    
+    // Show the clicked tab
+    const activeTab = document.getElementById(tabId);
+    activeTab.classList.add('active');
+    activeTab.style.display = "flex"; 
 }
 
-// Card Switching Logic
+// 3. SWIPE LOGIC: Next Coach
 function nextCoach() {
     currentIndex++;
     if (currentIndex >= coaches.length) {
-        currentIndex = 0; // Loop back
+        currentIndex = 0; // Loop back to first coach
     }
     const coach = coaches[currentIndex];
+    
+    // Update the HTML elements
     document.getElementById('coach-img').src = coach.img;
     document.getElementById('coach-name').innerText = coach.name;
     document.getElementById('coach-bio').innerText = coach.bio;
     document.getElementById('coach-price').innerText = coach.price + "€/h";
-    document.getElementById('coach-dist').innerText = coach.dist + " away";
 }
 
+// 4. MATCH LOGIC
 function matchCoach() {
     const coach = coaches[currentIndex];
     if (userBalance >= coach.price) {
-        alert(`Request sent to ${coach.name}! If they accept, your training canal will open.`);
-        // Here you would subtract the price if the match is instant, 
-        // or wait for the coach to say "Yes".
+        alert(`Match! Request sent to ${coach.name}.`);
     } else {
-        alert("Insufficient funds! Please add money to your wallet to match with this coach.");
-        showDeposit();
+        alert("Not enough money! Add funds in your account tab.");
+        showTab('account-tab'); // Automatically take them to the account to pay
     }
 }
 
-// Wallet Functions
+// 5. WALLET LOGIC
+function updateBalanceDisplay() {
+    const balanceEl = document.getElementById('balance');
+    balanceEl.innerText = userBalance;
+    
+    // Visual flash effect
+    balanceEl.style.color = "white"; 
+    setTimeout(() => { balanceEl.style.color = "#ff9f00"; }, 500);
+}
+
 function showDeposit() {
     document.getElementById('wallet-modal').style.display = 'flex';
 }
@@ -51,31 +69,9 @@ function hideDeposit() {
 function addMoney(amount) {
     userBalance += amount;
     updateBalanceDisplay();
-    alert(`Success! Added ${amount}€ to your wallet.`);
     hideDeposit();
 }
 
-// Init
+// 6. INITIALIZE: Run these when page loads
 updateBalanceDisplay();
-// Tab Switching Logic
-function showTab(tabId) {
-    // Hide all tabs
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    // Show selected tab
-    document.getElementById(tabId).classList.add('active');
-}
-
-// ... Keep your previous nextCoach, addMoney, and matchCoach functions here ...
-
-// Modified addMoney to show the orange updates
-function addMoney(amount) {
-    userBalance += amount;
-    updateBalanceDisplay();
-    // Simple visual feedback
-    const balanceEl = document.getElementById('balance');
-    balanceEl.style.color = "white"; 
-    setTimeout(() => { balanceEl.style.color = "#ff9f00"; }, 500);
-    hideDeposit();
-}
+showTab('discovery-tab');

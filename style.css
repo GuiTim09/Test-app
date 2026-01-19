@@ -131,18 +131,25 @@ header {
     font-size: 0.8rem;
     margin-right: 5px;
     text-transform: uppercase;
-}
-
-/* Tabs Logic */
+/* Tabs Logic - FIX */
 .tab-content {
-    display: none;
-    padding-top: 80px; /* Space for top wallet */
+    display: none !important; /* Hide everything by default */
+    padding-top: 100px; 
+    padding-bottom: 80px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
 }
 
 .tab-content.active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex !important; /* Show only the active one */
+}
+
+/* Make sure the main app area scrolls if content is long */
+#app {
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
 }
 
 /* Account Styling */

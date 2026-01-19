@@ -33,7 +33,8 @@ function nextCoach() {
     // Update the HTML elements
     document.getElementById('coach-img').src = coach.img;
     document.getElementById('coach-name').innerText = coach.name;
-    document.getElementById('coach-bio').innerText = coach.bio;
+    // Add this line inside nextCoach() to update the distance display
+    document.getElementById('coach-bio').innerHTML = `${coach.bio} <br><br> <span style="color: #888;">📍 ${coach.dist} away</span>`;
     document.getElementById('coach-price').innerText = coach.price + "€/h";
 }
 
